@@ -130,7 +130,7 @@ static void CompileShaders()
 
 
 
-static void CreateTriangle()
+static void CreateObjects()
 {
 	unsigned int indices[] = {
 		0, 3, 1,
@@ -220,7 +220,7 @@ int RunBasicOperation()
 	// Setup Viewport size
 	glViewport(0, 0, buffer_width, buffer_height);
 
-	CreateTriangle();
+	CreateObjects();
 	CompileShaders();
 
 	glm::mat4 projection = glm::perspective(45.0f, (GLfloat)buffer_width / (GLfloat)buffer_height, 0.1f, 100.0f);

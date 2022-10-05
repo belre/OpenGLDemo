@@ -121,7 +121,7 @@ static void CompileShaders()
 
 
 
-static void CreateTriangle()
+static void CreateObjects()
 {
 	GLfloat vertices[] = {
 		-1.0f, -1.0f, 0.0f,
@@ -196,7 +196,7 @@ int RunTransform()
 	// Setup Viewport size
 	glViewport(0, 0, buffer_width, buffer_height);
 
-	CreateTriangle();
+	CreateObjects();
 	CompileShaders();
 
 	// loop until window closed

@@ -145,6 +145,7 @@
     <ClCompile Include="BasicCleanUp.cpp" />
     <ClCompile Include="BasicOperation.cpp" />
     <ClCompile Include="Mesh.cpp" />
+    <ClCompile Include="Shader.cpp" />
     <ClCompile Include="Transform.cpp" />
     <ClCompile Include="Tutorial.cpp" />
     <ClCompile Include="XMovingTriangle.cpp" />
@@ -153,6 +154,7 @@
     <ClInclude Include="GlCommon.h" />
     <ClInclude Include="GlProgramSource.h" />
     <ClInclude Include="Mesh.h" />
+    <ClInclude Include="Shader.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
