@@ -1,8 +1,8 @@
-// Tutorial.cpp : This file contains the 'main' function. Program execution begins and ends there.
-//
 
 #include "GlCommon.h"
 #include "GlProgramSource.h"
+
+
 
 #include <iostream>
 #include <stdlib.h>
@@ -140,7 +140,7 @@ static void CreateTriangle()
 
 
 
-int RunXMovingTriangle()
+int RunTransform()
 {
 	// Initialize GLFW
 	if (!glfwInit())
@@ -232,3 +232,4 @@ int RunXMovingTriangle()
 
 	return 0;
 }
+

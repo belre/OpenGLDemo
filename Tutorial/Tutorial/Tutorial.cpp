@@ -8,7 +8,8 @@
 
 int main()
 {
-	RunXMovingTriangle();
+	//RunXMovingTriangle();
+	RunTransform();
 
 	return 0;
 }
