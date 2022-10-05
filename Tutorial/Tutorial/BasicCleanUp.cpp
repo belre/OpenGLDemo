@@ -2,10 +2,7 @@
 #include "GlCommon.h"
 #include "GlProgramSource.h"
 
-#define _USE_MATH_DEFINES
-
 #include <iostream>
-#include <stdlib.h>
 #include <vector>
 
 #include <GLM/mat4x4.hpp>
@@ -19,8 +16,6 @@
 static Window mainWindow;
 static std::vector<Mesh*> meshLists;
 static std::vector<Shader*> shaderLists;
-
-
 
 
 
