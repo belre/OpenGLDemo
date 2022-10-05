@@ -22,6 +22,7 @@ void main()															\n\
 	gl_Position = vec4(0.4 * pos.x, 0.4 * pos.y, pos.z, 1.0);		\n\
 }";
 
+// Fragment Shader
 static const char* fShader = "		      \n\
 #version 330														\n\
 																				\n\
@@ -31,6 +32,74 @@ void main()															\n\
 {																				\n\
 	color = vec4(1.0, 0.0, 0.0, 1.0);		  \n\
 }";
+
+void AddShader(GLuint the_program, const char* shader_code, GLenum shader_type)
+{
+	GLuint the_shader = glCreateShader(shader_type);
+
+	const GLchar* the_code[1];
+	the_code[0] = shader_code;
+
+	GLint code_length[1];
+	code_length[0] = strlen(shader_code);
+
+	glShaderSource(the_shader, 1, the_code, code_length);
+	glCompileShader(the_shader);
+
+	GLint result = 0;
+	GLchar eLog[1024] = { 0 };
+
+	glGetShaderiv(the_shader, GL_COMPILE_STATUS, &result);
+
+	if (!result)
+	{
+		glGetShaderInfoLog(the_shader, sizeof(eLog), nullptr, eLog);
+		std::cerr << "Error compiling the " << shader_type << " shader:'" << eLog << "'" << std::endl;
+		return;
+	}
+
+	glAttachShader(the_program, the_shader);
+}
+
+void CompileShaders()
+{
+	shader = glCreateProgram();
+
+	if(!shader) 
+	{
+		std::cerr << "Error creating shader program" << std::endl;
+		return;
+	}
+
+	AddShader(shader, vShader, GL_VERTEX_SHADER);
+	AddShader(shader, fShader, GL_FRAGMENT_SHADER);
+
+	GLint result = 0;
+	GLchar eLog[1024] = {0};
+
+	glLinkProgram(shader);
+	glGetProgramiv(shader, GL_LINK_STATUS, &result);
+
+	if(!result) 
+	{
+		glGetProgramInfoLog(shader, sizeof(eLog), nullptr, eLog);
+		std::cerr << "Error linking program:" << eLog << std::endl;
+		return;
+	}
+
+	glValidateProgram(shader);
+	glGetProgramiv(shader, GL_VALIDATE_STATUS, &result);
+
+	if (!result)
+	{
+		glGetProgramInfoLog(shader, sizeof(eLog), nullptr, eLog);
+		std::cerr << "Error validating program:" << eLog << std::endl;
+		return;
+	}
+
+}
+
+
 
 void CreateTriangle()
 {
@@ -107,6 +176,9 @@ int main()
 	// Setup Viewport size
 	glViewport(0, 0, buffer_width, buffer_height);
 
+	CreateTriangle();
+	CompileShaders();
+
 	// loop until window closed
 	while(!glfwWindowShouldClose(main_window)) 
 	{
@@ -114,8 +186,16 @@ int main()
 		glfwPollEvents();
 
 		// Clear Window
-		glClearColor(1.0f, 0.0f, 0.0f, 1.0f);
+		glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
 		glClear(GL_COLOR_BUFFER_BIT);
+
+		glUseProgram(shader);
+
+		glBindVertexArray(VAO);
+		glDrawArrays(GL_TRIANGLES, 0, 3);
+		glBindVertexArray(0);
+
+		glUseProgram(0);
 
 		glfwSwapBuffers(main_window);
 	}
