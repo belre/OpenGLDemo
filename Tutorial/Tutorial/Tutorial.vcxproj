@@ -143,6 +143,11 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Tutorial.cpp" />
+    <ClCompile Include="XMovingTriangle.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="GlCommon.h" />
+    <ClInclude Include="GlProgramSource.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
