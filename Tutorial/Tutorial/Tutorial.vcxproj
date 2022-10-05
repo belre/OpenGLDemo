@@ -88,7 +88,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>C:\External Libs\glew-2.1.0-win32\include;C:\External Libs\glfw-3.3.8\include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\External Libs\glew-2.1.0-win32\include;C:\External Libs\glfw-3.3.8\include;C:\External Libs\glm</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>

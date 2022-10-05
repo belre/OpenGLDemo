@@ -6,6 +6,9 @@
 
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
+#include <GLM/mat4x4.hpp>
+#include <GLM/gtc/matrix_transform.hpp>
+#include <GLM/gtc/type_ptr.hpp>
 
 static const GLint WIDTH = 800;
 static const GLint HEIGHT = 600;
