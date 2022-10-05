@@ -13,6 +13,9 @@ public:
 	virtual ~Shader();
 
 	void CreateFromString(const char* vertex_code, const char* fragment_code);
+	void CreateFromFiles(const char* vertex_location, const char* fragment_location);
+
+	const std::string ReadFile(const char* file_location);
 
 	GLuint GetProjectionLocation();
 
