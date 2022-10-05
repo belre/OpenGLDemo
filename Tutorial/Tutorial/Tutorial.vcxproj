@@ -142,6 +142,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="BasicCleanUp.cpp" />
     <ClCompile Include="BasicOperation.cpp" />
     <ClCompile Include="Transform.cpp" />
     <ClCompile Include="Tutorial.cpp" />

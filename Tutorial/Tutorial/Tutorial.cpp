@@ -10,7 +10,8 @@ int main()
 {
 	//RunXMovingTriangle();
 	//RunTransform();
-	RunBasicOperation();
+	//RunBasicOperation();
+	RunBasicCleanUp();
 
 	return 0;
 }
