@@ -86,6 +86,7 @@ int RunCameraSample()
 		uniformModel = shaderLists[0]->GetModelLocation();
 		uniformProjection = shaderLists[0]->GetProjectionLocation();
 
+
 		glm::mat4 model(1.0f);
 		model = glm::translate(model, glm::vec3(0.0f, 0.0f, -2.5f));
 		//model = glm::rotate(model, curAngle * toRadians, glm::vec3(0.0f, 1.0f, 0.0f));
