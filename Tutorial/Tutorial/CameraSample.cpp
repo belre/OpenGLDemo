@@ -12,11 +12,13 @@
 #include "Mesh.h"
 #include "Shader.h"
 #include "Window.h"
+#include "Camera.h"
 
 static std::vector<Mesh*> meshLists;
 static std::vector<Shader*> shaderLists;
 
-
+GLfloat deltaTime = 0.0f;
+GLfloat lastTime = 0.0f;
 
 // Vertex Shader
 static const char* vShader = "./Shaders/shader.vert";
@@ -63,11 +65,18 @@ int RunCameraSample()
 	Window mainWindow(800, 600);
 	mainWindow.Initialize();
 
+	Camera camera(
+		glm::vec3(0.0f, 0.0f, 0.0f),
+		glm::vec3(0.0f, 1.0f, 0.0f),
+		-90.0f, 0.0f, 5.0f, 1.0f);
+
 	CreateObjects();
 	CreateShaders();
 
 	GLuint uniformProjection = 0;
 	GLuint uniformModel = 0;
+	GLuint uniformView = 0;
+
 	glm::mat4 projection = glm::perspective(45.0f,
 		(GLfloat)mainWindow.getRecommendedAspect(),
 		0.1f, 100.0f);
@@ -75,8 +84,14 @@ int RunCameraSample()
 	// loop until window closed
 	while (!mainWindow.getShouldClose())
 	{
+		GLfloat now = glfwGetTime();			// SDL_GetPerformanceCounter();
+		deltaTime = now - lastTime;				// (now - lastTime) * 1000 / SDL_GetPerformanceFrequency()
+		lastTime = now;
+
 		// Get and handle user input event
 		glfwPollEvents();
+
+		camera.keyControl(mainWindow.getKeys(), deltaTime);
 
 		// Clear Window
 		glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
@@ -85,7 +100,7 @@ int RunCameraSample()
 		shaderLists[0]->UseShader();
 		uniformModel = shaderLists[0]->GetModelLocation();
 		uniformProjection = shaderLists[0]->GetProjectionLocation();
-
+		uniformView = shaderLists[0]->GetViewLocation();
 
 		glm::mat4 model(1.0f);
 		model = glm::translate(model, glm::vec3(0.0f, 0.0f, -2.5f));
@@ -93,6 +108,7 @@ int RunCameraSample()
 		model = glm::scale(model, glm::vec3(0.4f, 0.4f, 1.0));
 		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
 		glUniformMatrix4fv(uniformProjection, 1, GL_FALSE, glm::value_ptr(projection));
+		glUniformMatrix4fv(uniformView, 1, GL_FALSE, glm::value_ptr(camera.calculateViewMatrix()));
 		meshLists[0]->RenderMesh();
 
 		model = glm::mat4(1.0f);

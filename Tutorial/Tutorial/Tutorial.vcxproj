@@ -151,6 +151,7 @@
   <ItemGroup>
     <ClCompile Include="BasicCleanUp.cpp" />
     <ClCompile Include="BasicOperation.cpp" />
+    <ClCompile Include="Camera.cpp" />
     <ClCompile Include="CameraSample.cpp" />
     <ClCompile Include="Mesh.cpp" />
     <ClCompile Include="Shader.cpp" />
@@ -160,6 +161,7 @@
     <ClCompile Include="XMovingTriangle.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Camera.h" />
     <ClInclude Include="GlCommon.h" />
     <ClInclude Include="GlProgramSource.h" />
     <ClInclude Include="Mesh.h" />
