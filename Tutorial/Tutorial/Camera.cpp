@@ -40,6 +40,27 @@ void Camera::keyControl(bool* keys, GLfloat delta_time)
 	}
 }
 
+void Camera::mouseControl(GLfloat change_x, GLfloat change_y)
+{
+	change_x *= _turnSpeed;
+	change_y *= _turnSpeed;
+
+	_yaw += change_x;
+	_pitch += change_y;
+
+	if(_pitch > 89.0f) 
+	{
+		_pitch = 89.0f;
+	}
+
+	if(_pitch < -89.0f) 
+	{
+		_pitch = -89.0f;
+	}
+
+	update();
+}
+
 
 glm::mat4 Camera::calculateViewMatrix()
 {

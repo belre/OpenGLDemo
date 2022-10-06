@@ -68,7 +68,7 @@ int RunCameraSample()
 	Camera camera(
 		glm::vec3(0.0f, 0.0f, 0.0f),
 		glm::vec3(0.0f, 1.0f, 0.0f),
-		-90.0f, 0.0f, 5.0f, 1.0f);
+		-90.0f, 0.0f, 5.0f, 0.4f);
 
 	CreateObjects();
 	CreateShaders();
@@ -92,6 +92,7 @@ int RunCameraSample()
 		glfwPollEvents();
 
 		camera.keyControl(mainWindow.getKeys(), deltaTime);
+		camera.mouseControl(mainWindow.getXChange(), mainWindow.getYChange());
 
 		// Clear Window
 		glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
