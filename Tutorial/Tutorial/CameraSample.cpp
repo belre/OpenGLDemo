@@ -59,9 +59,9 @@ static void CreateShaders()
 }
 
 
-int RunCamera()
+int RunCameraSample()
 {
-	mainWindow = Window(800, 600);
+	Window mainWindow = Window(800, 600);
 	mainWindow.Initialize();
 
 	CreateObjects();

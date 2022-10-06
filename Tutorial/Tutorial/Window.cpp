@@ -22,6 +22,8 @@ Window::Window(GLint windowWidth, GLint windowHeight)
 	}
 }
 
+
+
 int Window::Initialize()
 {
 	// Initialize GLFW
@@ -52,8 +54,7 @@ int Window::Initialize()
 	}
 
 	// Get Buffer size information
-	int buffer_width, buffer_height;
-	glfwGetFramebufferSize(_mainWindow, &buffer_width, &buffer_height);
+	glfwGetFramebufferSize(_mainWindow, &_bufferWidth, &_bufferHeight);
 
 	// Set context for GLEW to use
 	glfwMakeContextCurrent(_mainWindow);
@@ -74,7 +75,7 @@ int Window::Initialize()
 	glEnable(GL_DEPTH_TEST);
 
 	// Setup Viewport size
-	glViewport(0, 0, buffer_width, buffer_height);
+	glViewport(0, 0, _bufferWidth, _bufferHeight);
 
 	glfwSetWindowUserPointer(_mainWindow, this);
 }

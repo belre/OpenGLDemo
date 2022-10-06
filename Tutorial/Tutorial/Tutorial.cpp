@@ -12,6 +12,7 @@ int main()
 	//RunTransform();
 	//RunBasicOperation();
 	RunBasicCleanUp();
+	//RunCameraSample();
 
 	return 0;
 }

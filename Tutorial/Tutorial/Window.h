@@ -13,6 +13,7 @@ public:
 	Window();
 	Window(GLint windowWidth, GLint windowHeight);
 
+
 	int Initialize();
 
 	GLint getBufferWidth() { return _bufferWidth; }
@@ -24,6 +25,7 @@ public:
 	void swapBuffers() { glfwSwapBuffers(_mainWindow); }
 
 	
+
 	virtual ~Window();
 
 
@@ -32,8 +34,6 @@ private:
 	GLFWwindow* _mainWindow;
 	GLint _width;
 	GLint _height;
-
-
 	GLint _bufferWidth;
 	GLint _bufferHeight;
 
