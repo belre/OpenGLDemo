@@ -1,20 +1,14 @@
+#include <iomanip>
+#include <iostream>
 #include "Window.h"
 
-Window::Window()
-{
-	_width = 800;
-	_height = 600;
-
-	for(size_t i = 0; i < 1024; i++) 
-	{
-		_keys[i] = false;
-	}
-}
 
 Window::Window(GLint windowWidth, GLint windowHeight)
 {
 	_width = windowWidth;
 	_height = windowHeight;
+	_changeX = 0.0f;
+	_changeY = 0.0f;
 
 	for (size_t i = 0; i < 1024; i++)
 	{
@@ -60,6 +54,7 @@ int Window::Initialize()
 	glfwMakeContextCurrent(_mainWindow);
 
 	createCallbacks();
+	glfwSetInputMode(_mainWindow, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
 
 	// Allow modern extension features
 	glewExperimental = GL_TRUE;
@@ -83,6 +78,22 @@ int Window::Initialize()
 void Window::createCallbacks()
 {
 	glfwSetKeyCallback(_mainWindow, handleKeys);
+	glfwSetCursorPosCallback(_mainWindow, handleMouse);
+}
+
+
+GLfloat Window::getXChange()
+{
+	GLfloat the_change = _changeX;
+	_changeX = 0.0f;
+	return the_change;
+}
+
+GLfloat Window::getYChange()
+{
+	GLfloat the_change = _changeY;
+	_changeY = 0.0f;
+	return the_change;
 }
 
 void Window::handleKeys(GLFWwindow* window, int key, int code, int action, int mode)
@@ -99,16 +110,32 @@ void Window::handleKeys(GLFWwindow* window, int key, int code, int action, int m
 		if(action == GLFW_PRESS) 
 		{
 			the_window->_keys[key] = true;
-			std::cout << "Pressed:" << key << std::endl;
 		}
 		else if(action == GLFW_RELEASE) 
 		{
 			the_window->_keys[key] = false;
-			std::cout << "Released:" << key << std::endl;
 		}
 	}
 }
 
+
+void Window::handleMouse(GLFWwindow* window, double posX, double posY)
+{
+	Window* the_window = static_cast<Window*>(glfwGetWindowUserPointer(window));
+
+	if(the_window->_mouseFirstMoved) 
+	{
+		the_window->_lastX = posX;
+		the_window->_lastY = posY;
+		the_window->_mouseFirstMoved = false;
+	}
+
+	the_window->_changeX = posX - the_window->_lastX;
+	the_window->_changeY = the_window->_lastY - posY;
+
+	the_window->_lastX = posX;
+	the_window->_lastY = posY;
+}
 
 Window::~Window() {
 	glfwDestroyWindow(_mainWindow);

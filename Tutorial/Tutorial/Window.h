@@ -10,9 +10,11 @@ class Window
 
 
 public:
-	Window();
 	Window(GLint windowWidth, GLint windowHeight);
+	Window() : Window(800, 600)
+	{
 
+	}
 
 	int Initialize();
 
@@ -22,9 +24,12 @@ public:
 
 	bool getShouldClose() { return glfwWindowShouldClose(_mainWindow); }
 
-	void swapBuffers() { glfwSwapBuffers(_mainWindow); }
+	bool* getKeys() { return _keys; }
 
-	
+	GLfloat getXChange();
+	GLfloat getYChange();
+
+	void swapBuffers() { glfwSwapBuffers(_mainWindow); }
 
 	virtual ~Window();
 
@@ -39,10 +44,16 @@ private:
 
 	bool _keys[1024];
 
+	GLfloat _lastX;
+	GLfloat _lastY;
+	GLfloat _changeX;
+	GLfloat _changeY;
+	bool _mouseFirstMoved;
+
 private:
 
 	void createCallbacks();
 	static void handleKeys(GLFWwindow* window, int key, int code, int action, int mode);
-
+	static void handleMouse(GLFWwindow* window, double posX, double posY);
 };
 
