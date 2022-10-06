@@ -13,7 +13,6 @@
 #include "Shader.h"
 #include "Window.h"
 
-static Window mainWindow;
 static std::vector<Mesh*> meshLists;
 static std::vector<Shader*> shaderLists;
 
@@ -61,7 +60,7 @@ static void CreateShaders()
 
 int RunCameraSample()
 {
-	Window mainWindow = Window(800, 600);
+	Window mainWindow(800, 600);
 	mainWindow.Initialize();
 
 	CreateObjects();

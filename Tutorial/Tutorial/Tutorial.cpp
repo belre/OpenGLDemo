@@ -11,8 +11,8 @@ int main()
 	//RunXMovingTriangle();
 	//RunTransform();
 	//RunBasicOperation();
-	RunBasicCleanUp();
-	//RunCameraSample();
+	//RunBasicCleanUp();
+	RunCameraSample();
 
 	return 0;
 }
