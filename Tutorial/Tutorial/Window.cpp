@@ -4,12 +4,22 @@ Window::Window()
 {
 	_width = 800;
 	_height = 600;
+
+	for(size_t i = 0; i < 1024; i++) 
+	{
+		_keys[i] = false;
+	}
 }
 
 Window::Window(GLint windowWidth, GLint windowHeight)
 {
 	_width = windowWidth;
 	_height = windowHeight;
+
+	for (size_t i = 0; i < 1024; i++)
+	{
+		_keys[i] = false;
+	}
 }
 
 int Window::Initialize()
@@ -48,6 +58,8 @@ int Window::Initialize()
 	// Set context for GLEW to use
 	glfwMakeContextCurrent(_mainWindow);
 
+	createCallbacks();
+
 	// Allow modern extension features
 	glewExperimental = GL_TRUE;
 
@@ -63,6 +75,37 @@ int Window::Initialize()
 
 	// Setup Viewport size
 	glViewport(0, 0, buffer_width, buffer_height);
+
+	glfwSetWindowUserPointer(_mainWindow, this);
+}
+
+void Window::createCallbacks()
+{
+	glfwSetKeyCallback(_mainWindow, handleKeys);
+}
+
+void Window::handleKeys(GLFWwindow* window, int key, int code, int action, int mode)
+{
+	Window* the_window = static_cast<Window*>(glfwGetWindowUserPointer(window));
+
+	if(key == GLFW_KEY_ESCAPE && action == GLFW_PRESS) 
+	{
+		glfwSetWindowShouldClose(window, GL_TRUE);
+	}
+
+	if(key >= 0 && key < 1024) 
+	{
+		if(action == GLFW_PRESS) 
+		{
+			the_window->_keys[key] = true;
+			std::cout << "Pressed:" << key << std::endl;
+		}
+		else if(action == GLFW_RELEASE) 
+		{
+			the_window->_keys[key] = false;
+			std::cout << "Released:" << key << std::endl;
+		}
+	}
 }
 
 

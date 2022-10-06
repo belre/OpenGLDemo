@@ -7,6 +7,8 @@
 
 class Window
 {
+
+
 public:
 	Window();
 	Window(GLint windowWidth, GLint windowHeight);
@@ -21,13 +23,26 @@ public:
 
 	void swapBuffers() { glfwSwapBuffers(_mainWindow); }
 
+	
 	virtual ~Window();
 
+
 private:
+
 	GLFWwindow* _mainWindow;
 	GLint _width;
 	GLint _height;
+
+
 	GLint _bufferWidth;
 	GLint _bufferHeight;
+
+	bool _keys[1024];
+
+private:
+
+	void createCallbacks();
+	static void handleKeys(GLFWwindow* window, int key, int code, int action, int mode);
+
 };
 
