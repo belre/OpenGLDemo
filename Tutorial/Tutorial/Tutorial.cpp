@@ -12,7 +12,8 @@ int main()
 	//RunTransform();
 	//RunBasicOperation();
 	//RunBasicCleanUp();
-	RunCameraSample();
+	//RunCameraSample();
+	RunStepPractice();
 
 	return 0;
 }

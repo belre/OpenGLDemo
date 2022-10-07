@@ -60,7 +60,7 @@ static void CreateShaders()
 }
 
 
-int RunCameraSample()
+int RunStepPractice()
 {
 	Window mainWindow(800, 600);
 	mainWindow.Initialize();

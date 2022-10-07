@@ -16,6 +16,9 @@
     <Filter Include="Texts">
       <UniqueIdentifier>{f819cc07-67ee-48e5-87f8-e26b713ac8bc}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\STEP">
+      <UniqueIdentifier>{4f9d7bc8-834a-4271-a4c2-7381bb0a83cf}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Tutorial.cpp">
@@ -47,6 +50,9 @@
     </ClCompile>
     <ClCompile Include="Camera.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="StepPractice.cpp">
+      <Filter>Source Files\STEP</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
