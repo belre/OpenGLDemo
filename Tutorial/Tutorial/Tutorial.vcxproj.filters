@@ -54,6 +54,12 @@
     <ClCompile Include="StepPractice.cpp">
       <Filter>Source Files\STEP</Filter>
     </ClCompile>
+    <ClCompile Include="StepData.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="StepVertex.cpp">
+      <Filter>Source Files\STEP</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GlCommon.h">
@@ -74,12 +80,21 @@
     <ClInclude Include="Camera.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="StepData.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="StepVertex.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <CopyFileToFolders Include="Shaders\shader.frag">
       <Filter>Texts</Filter>
     </CopyFileToFolders>
     <CopyFileToFolders Include="Shaders\shader.vert">
+      <Filter>Texts</Filter>
+    </CopyFileToFolders>
+    <CopyFileToFolders Include="StepData\step_elements.csv">
       <Filter>Texts</Filter>
     </CopyFileToFolders>
   </ItemGroup>

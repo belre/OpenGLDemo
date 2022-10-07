@@ -13,6 +13,7 @@
 #include "Shader.h"
 #include "Window.h"
 #include "Camera.h"
+#include "StepData.h"
 
 static std::vector<Mesh*> meshLists;
 static std::vector<Shader*> shaderLists;
@@ -26,6 +27,7 @@ static const char* vShader = "./Shaders/shader.vert";
 // Fragment Shader
 static const char* fShader = "./Shaders/shader.frag";
 
+static const char* stepPath = "./StepData/step_elements.csv";
 
 static void CreateObjects()
 {
@@ -69,6 +71,10 @@ int RunStepPractice()
 		glm::vec3(0.0f, 0.0f, 0.0f),
 		glm::vec3(0.0f, 1.0f, 0.0f),
 		-90.0f, 0.0f, 5.0f, 0.4f);
+
+	StepData step_data;
+	step_data.ReadFromTextData(stepPath);
+
 
 	CreateObjects();
 	CreateShaders();
