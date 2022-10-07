@@ -11,7 +11,7 @@ public:
 	StepVertex();
 	virtual ~StepVertex();
 
-	int GetNodeId() const {
+	virtual int GetNodeId() const {
 		return _node_id;
 	}
 
@@ -23,9 +23,7 @@ public:
 		return _is_parsed;
 	}
 
-	void ParseLine(std::string line);
-
-
+	virtual void ParseLine(std::string line);
 
 private:
 	int _node_id;

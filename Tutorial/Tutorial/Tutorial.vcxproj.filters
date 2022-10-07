@@ -54,10 +54,19 @@
     <ClCompile Include="StepPractice.cpp">
       <Filter>Source Files\STEP</Filter>
     </ClCompile>
-    <ClCompile Include="StepData.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="StepVertex.cpp">
+      <Filter>Source Files\STEP</Filter>
+    </ClCompile>
+    <ClCompile Include="StepEdgeLine.cpp">
+      <Filter>Source Files\STEP</Filter>
+    </ClCompile>
+    <ClCompile Include="StepEdge.cpp">
+      <Filter>Source Files\STEP</Filter>
+    </ClCompile>
+    <ClCompile Include="StepData.cpp">
+      <Filter>Source Files\STEP</Filter>
+    </ClCompile>
+    <ClCompile Include="StepLoop.cpp">
       <Filter>Source Files\STEP</Filter>
     </ClCompile>
   </ItemGroup>
@@ -84,6 +93,15 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="StepVertex.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="StepEdge.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="StepEdgeLine.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="StepLoop.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

@@ -3,6 +3,8 @@
 #include <iostream>
 #include <sstream>
 
+#include "StepEdge.h"
+#include "StepEdgeLine.h"
 #include "StepVertex.h"
 
 StepData::StepData() {
@@ -38,10 +40,27 @@ void StepData::ReadFromTextData(std::string path)
 				}
 			}
 			else if(category == "Edge") {
-				
+				StepEdge edge;
+				edge.ParseLine(text.substr(std::distance(text.begin(), split_iter) + 1));
+
+				if(edge.GetPattern() == StepEdge::LINE) {
+					StepEdgeLine edge_line;
+					edge_line.ParseLine(text.substr(std::distance(text.begin(), split_iter) + 1));
+
+					if(edge_line.GetIsParsed()) 
+					{
+						_edges.push_back(edge_line);
+					}
+				}
 			}
 			else if(category == "Loop") {
-				
+				StepLoop loop;
+				loop.ParseLine(text.substr(std::distance(text.begin(), split_iter) + 1));
+
+				if(loop.GetIsParsed()) {
+					_loops.push_back(loop);
+				}
+
 			}
 
 		}

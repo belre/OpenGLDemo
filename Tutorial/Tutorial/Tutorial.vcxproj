@@ -156,6 +156,9 @@
     <ClCompile Include="Mesh.cpp" />
     <ClCompile Include="Shader.cpp" />
     <ClCompile Include="StepData.cpp" />
+    <ClCompile Include="StepEdge.cpp" />
+    <ClCompile Include="StepEdgeLine.cpp" />
+    <ClCompile Include="StepLoop.cpp" />
     <ClCompile Include="StepPractice.cpp" />
     <ClCompile Include="StepVertex.cpp" />
     <ClCompile Include="Transform.cpp" />
@@ -170,6 +173,9 @@
     <ClInclude Include="Mesh.h" />
     <ClInclude Include="Shader.h" />
     <ClInclude Include="StepData.h" />
+    <ClInclude Include="StepEdge.h" />
+    <ClInclude Include="StepEdgeLine.h" />
+    <ClInclude Include="StepLoop.h" />
     <ClInclude Include="StepVertex.h" />
     <ClInclude Include="Window.h" />
   </ItemGroup>
