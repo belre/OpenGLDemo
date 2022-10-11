@@ -15,7 +15,7 @@ public:
 
 private:
 	GLuint VAO, VBO, IBO;
-	GLsizei _indexCount;
 	GLsizei _number_vertices;
+	GLsizei _number_indices;
 };
 

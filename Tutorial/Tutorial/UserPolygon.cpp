@@ -8,12 +8,13 @@ UserPolygon::UserPolygon()
 	VAO = 0;
 	VBO = 0;
 	IBO = 0;
-	_indexCount = 0;
+	_number_indices = 0;
 }
 
 void UserPolygon::Create(std::vector<glm::vec3> vertices, std::vector<unsigned int> indices)
 {
 	_number_vertices = vertices.size();
+	_number_indices = indices.size();
 
 	glGenVertexArrays(1, &VAO);
 	glBindVertexArray(VAO);
@@ -42,8 +43,8 @@ void UserPolygon::Render()
 	glBindBuffer(GL_ARRAY_BUFFER, VBO);
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, IBO);
 
-	glDrawArrays(GL_TRIANGLE_FAN, 0, 4);
-
+	glDrawArrays(GL_TRIANGLE_FAN, 0, _number_vertices);
+	
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
 
@@ -70,7 +71,7 @@ void UserPolygon::Clear()
 		VAO = 0;
 	}
 
-	_indexCount = 0;
+	_number_indices = 0;
 }
 
 UserPolygon::~UserPolygon()

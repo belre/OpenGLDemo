@@ -40,6 +40,8 @@ static void CreateObjects(StepData& step_data)
 	indices.push_back(1);
 	indices.push_back(2);
 	indices.push_back(3);
+	indices.push_back(4);
+	indices.push_back(5);
 
 
 	UserPolygon* polygon = new UserPolygon();
