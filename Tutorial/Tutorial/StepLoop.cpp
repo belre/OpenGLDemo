@@ -39,10 +39,8 @@ void StepLoop::ParseLine(std::string line) {
 
 void StepLoop::Bind(StepData& data)
 {
-	auto edge_id_list = data.GetEdgeId();
-
 	_edges_ref.clear();
-	for(auto iter = edge_id_list.begin(); iter != edge_id_list.end(); iter++) 
+	for(auto iter = _loop_id.begin(); iter != _loop_id.end(); iter++) 
 	{
 		StepEdgeLine edge_data = data.GetEdge(*iter);
 

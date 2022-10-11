@@ -114,7 +114,7 @@ static void CreateShaders()
 
 int RunStepPractice()
 {
-	Window mainWindow(800, 600);
+	Window mainWindow(600, 600);
 	mainWindow.Initialize();
 
 	Camera camera(
@@ -132,9 +132,13 @@ int RunStepPractice()
 	GLuint uniformModel = 0;
 	GLuint uniformView = 0;
 
+
+	/*
 	glm::mat4 projection = glm::perspective(45.0f,
 		(GLfloat)mainWindow.getRecommendedAspect(),
 		0.1f, 100.0f);
+*/
+	glm::mat4 projection  = glm::ortho(-50.0f, 50.f, 50.0f, -50.0f, -100.0f, 100.0f);
 
 	// loop until window closed
 	while (!mainWindow.getShouldClose())
@@ -165,7 +169,13 @@ int RunStepPractice()
 		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
 		glUniformMatrix4fv(uniformProjection, 1, GL_FALSE, glm::value_ptr(projection));
 		glUniformMatrix4fv(uniformView, 1, GL_FALSE, glm::value_ptr(camera.calculateViewMatrix()));
-		polygonLists[0]->Render();
+
+		for(auto iter = polygonLists.begin() ; iter != polygonLists.end(); iter++)
+		{
+			glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+			(*iter)->Render();
+		}
+
 
 		
 		glUseProgram(0);
