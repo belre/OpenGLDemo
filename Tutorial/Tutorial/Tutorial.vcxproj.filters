@@ -121,5 +121,11 @@
     <CopyFileToFolders Include="StepData\step_elements.csv">
       <Filter>Texts</Filter>
     </CopyFileToFolders>
+    <CopyFileToFolders Include="Shaders\user_shader.frag">
+      <Filter>Texts</Filter>
+    </CopyFileToFolders>
+    <CopyFileToFolders Include="Shaders\user_shader.vert">
+      <Filter>Texts</Filter>
+    </CopyFileToFolders>
   </ItemGroup>
 </Project>

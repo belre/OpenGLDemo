@@ -14,29 +14,42 @@
 #include "Window.h"
 #include "Camera.h"
 #include "StepData.h"
+#include "UserPolygon.h"
 
-static std::vector<Mesh*> meshLists;
 static std::vector<Shader*> shaderLists;
+static std::vector<UserPolygon*> polygonLists;
 
 static GLfloat deltaTime = 0.0f;
 static GLfloat lastTime = 0.0f;
 
 // Vertex Shader
-static const char* vShader = "./Shaders/shader.vert";
+static const char* vShader = "./Shaders/user_shader.vert";
 
 // Fragment Shader
-static const char* fShader = "./Shaders/shader.frag";
+static const char* fShader = "./Shaders/user_shader.frag";
 
 static const char* stepPath = "./StepData/step_elements.csv";
 
 static void CreateObjects(StepData& step_data)
 {
-	unsigned int indices[] = {
-		0, 3, 1,
-		1, 3, 2,
-		2, 3, 0,
-		0, 1, 2
-	};
+	
+	std::vector<glm::vec3> vertices = step_data.GetVertexPosition();
+
+	std::vector<unsigned int> indices;
+	indices.push_back(0);
+	indices.push_back(1);
+	indices.push_back(2);
+	indices.push_back(3);
+
+
+	UserPolygon* polygon = new UserPolygon();
+	polygon->Create(vertices, indices);
+	polygonLists.push_back(polygon);
+
+
+
+	/*
+	
 
 	GLfloat vertices[] = {
 		-1.0f, -1.0f, 0.0f,
@@ -52,6 +65,7 @@ static void CreateObjects(StepData& step_data)
 	Mesh* obj2 = new Mesh();
 	obj2->CreateMesh(vertices, indices, 12, 12);
 	meshLists.push_back(obj2);
+	*/
 }
 
 static void CreateShaders()
@@ -110,20 +124,15 @@ int RunStepPractice()
 		uniformView = shaderLists[0]->GetViewLocation();
 
 		glm::mat4 model(1.0f);
-		model = glm::translate(model, glm::vec3(0.0f, 0.0f, -2.5f));
+		//model = glm::translate(model, glm::vec3(0.0f, 0.0f, -2.5f));
 		//model = glm::rotate(model, curAngle * toRadians, glm::vec3(0.0f, 1.0f, 0.0f));
-		model = glm::scale(model, glm::vec3(0.4f, 0.4f, 1.0));
+		//model = glm::scale(model, glm::vec3(0.4f, 0.4f, 1.0));
 		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
 		glUniformMatrix4fv(uniformProjection, 1, GL_FALSE, glm::value_ptr(projection));
 		glUniformMatrix4fv(uniformView, 1, GL_FALSE, glm::value_ptr(camera.calculateViewMatrix()));
-		meshLists[0]->RenderMesh();
+		polygonLists[0]->Render();
 
-		model = glm::mat4(1.0f);
-		model = glm::translate(model, glm::vec3(0.0f, 1.0f, -2.5f));
-		model = glm::scale(model, glm::vec3(0.4f, 0.4f, 1.0));
-		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
-		meshLists[1]->RenderMesh();
-
+		
 		glUseProgram(0);
 
 		mainWindow.swapBuffers();
