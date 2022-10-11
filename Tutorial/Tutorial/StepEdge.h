@@ -1,6 +1,11 @@
 #pragma once
 #include <string>
 
+#include "StepVertex.h"
+
+class StepData;
+
+
 /**
  * \brief エッジ情報
  * ※本来はTree構造にするためにもう一つ抽象クラスを用意するが、セレクト部分に関しては省略
@@ -33,6 +38,18 @@ public:
 		return _is_parsed;
 	}
 
+	virtual void Bind(StepData& data);
+
+	StepVertex& GetStartVertex()
+	{
+		return _start_data;
+	}
+
+	StepVertex& GetEndVertex()
+	{
+		return _end_data;
+	}
+
 	virtual ~StepEdge();
 
 private:
@@ -42,5 +59,7 @@ private:
 	EdgePattern _edge_pattern;
 	bool _is_parsed;
 
+	StepVertex _start_data;
+	StepVertex _end_data;
 };
 

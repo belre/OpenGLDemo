@@ -32,42 +32,76 @@ static const char* stepPath = "./StepData/step_elements.csv";
 
 static void CreateObjects(StepData& step_data)
 {
-	
-	std::vector<glm::vec3> vertices = step_data.GetVertexPosition();
 
-	std::vector<unsigned int> indices;
-	indices.push_back(0);
-	indices.push_back(1);
-	indices.push_back(2);
-	indices.push_back(3);
-	indices.push_back(4);
-	indices.push_back(5);
+	auto loops = step_data.GetClosedLoop();
+	for(auto iter_loop = loops.begin(); iter_loop != loops.end() ; iter_loop++) 
+	{
+		std::vector<StepVertex> vertice_nodes;
+		std::vector<unsigned int> indices;
+
+		auto edges = iter_loop->GetEdges();
+
+		std::vector<int> vertex_list;
+
+		for(auto iter_edge = edges.begin(); iter_edge != edges.end(); iter_edge++) 
+		{
+			auto start_id = iter_edge->GetStartVertex().GetNodeId();
+			auto end_id = iter_edge->GetEndVertex().GetNodeId();
+
+			if(std::find(vertex_list.begin(), vertex_list.end(), start_id) == std::end(vertex_list) ) 
+			{
+				vertex_list.push_back(start_id);
+			}
+
+			if (std::find(vertex_list.begin(), vertex_list.end(), end_id) == std::end(vertex_list))
+			{
+				vertex_list.push_back(end_id);
+			}
+		}
+
+		// register vertexes
+		for(auto iter_v = vertex_list.begin(); iter_v != vertex_list.end(); iter_v++ ) 
+		{
+			auto node = step_data.GetVertex(*iter_v);
+			vertice_nodes.push_back(node);
+		}
+
+		for(auto iter_edge = edges.begin() ; iter_edge != edges.end(); iter_edge++) 
+		{
+			auto start_node = iter_edge->GetStartVertex();
+			auto end_node = iter_edge->GetEndVertex();
+
+			auto iter_node_start = std::find_if(vertice_nodes.begin(), vertice_nodes.end(), 
+				[start_node](StepVertex node) {				return node.GetNodeId() == start_node.GetNodeId();});
+
+			auto iter_node_end = std::find_if(vertice_nodes.begin(), vertice_nodes.end(),
+				[end_node](StepVertex node) {				return node.GetNodeId() == end_node.GetNodeId(); });
+
+			// Register Indices
+			if(iter_node_start != std::end(vertice_nodes) && iter_node_end != std::end(vertice_nodes)) 
+			{
+				int start_pos = std::distance(vertice_nodes.begin(), iter_node_start);
+				int end_pos = std::distance(vertice_nodes.begin(), iter_node_end);
+
+				indices.push_back(start_pos);
+				indices.push_back(end_pos);
+			}
+		}
+
+		std::vector<glm::vec3> vertices;
+
+		// convert vertices nodes
+		for (auto iter_v = vertice_nodes.begin(); iter_v != vertice_nodes.end(); iter_v++)
+		{
+			vertices.push_back(iter_v->GetPosition());
+		}
 
 
-	UserPolygon* polygon = new UserPolygon();
-	polygon->Create(vertices, indices);
-	polygonLists.push_back(polygon);
+		UserPolygon* polygon = new UserPolygon();
+		polygon->Create(vertices, indices);
+		polygonLists.push_back(polygon);
+	}
 
-
-
-	/*
-	
-
-	GLfloat vertices[] = {
-		-1.0f, -1.0f, 0.0f,
-		0.0f, -1.0f, 1.0f,
-		1.0f, -1.0f, 0.0f,
-		0.0f, 1.0f, 0.0f
-	};
-
-	Mesh* obj1 = new Mesh();
-	obj1->CreateMesh(vertices, indices, 12, 12);
-	meshLists.push_back(obj1);
-
-	Mesh* obj2 = new Mesh();
-	obj2->CreateMesh(vertices, indices, 12, 12);
-	meshLists.push_back(obj2);
-	*/
 }
 
 static void CreateShaders()
@@ -90,7 +124,6 @@ int RunStepPractice()
 
 	StepData step_data;
 	step_data.ReadFromTextData(stepPath);
-
 
 	CreateObjects(step_data);
 	CreateShaders();

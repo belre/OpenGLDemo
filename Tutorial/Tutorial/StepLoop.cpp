@@ -3,8 +3,8 @@
 #include <regex>
 
 
-StepLoop::StepLoop() {
-	
+StepLoop::StepLoop() 
+{
 }
 
 void StepLoop::ParseLine(std::string line) {
@@ -34,8 +34,22 @@ void StepLoop::ParseLine(std::string line) {
 		inline_text = match_inline.suffix();
 	}
 
-
 	_is_parsed = true;
+}
+
+void StepLoop::Bind(StepData& data)
+{
+	auto edge_id_list = data.GetEdgeId();
+
+	_edges_ref.clear();
+	for(auto iter = edge_id_list.begin(); iter != edge_id_list.end(); iter++) 
+	{
+		StepEdgeLine edge_data = data.GetEdge(*iter);
+
+		edge_data.Bind(data);
+
+		_edges_ref.push_back(edge_data);
+	}
 }
 
 StepLoop::~StepLoop() {

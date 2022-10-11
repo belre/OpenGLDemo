@@ -35,7 +35,8 @@ void StepData::ReadFromTextData(std::string path)
 				StepVertex vertex;
 				vertex.ParseLine(text.substr(std::distance(text.begin(), split_iter) + 1));
 
-				if(vertex.GetIsParsed()) {
+				if(vertex.GetIsParsed()) 
+				{
 					_vertexes.push_back(vertex);
 				}
 			}
@@ -58,16 +59,19 @@ void StepData::ReadFromTextData(std::string path)
 				StepLoop loop;
 				loop.ParseLine(text.substr(std::distance(text.begin(), split_iter) + 1));
 
-				if(loop.GetIsParsed()) {
+				if(loop.GetIsParsed()) 
+				{
 					_loops.push_back(loop);
 				}
-
 			}
-
 		}
 	}
 
-
+	// bind
+	for(auto iter_loop = _loops.begin(); iter_loop != _loops.end(); iter_loop++) 
+	{
+		iter_loop->Bind(*this);
+	}
 
 }
 
