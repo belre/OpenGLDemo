@@ -163,6 +163,7 @@
     <ClCompile Include="StepVertex.cpp" />
     <ClCompile Include="Transform.cpp" />
     <ClCompile Include="Tutorial.cpp" />
+    <ClCompile Include="UserPolygon.cpp" />
     <ClCompile Include="Window.cpp" />
     <ClCompile Include="XMovingTriangle.cpp" />
   </ItemGroup>
@@ -177,6 +178,7 @@
     <ClInclude Include="StepEdgeLine.h" />
     <ClInclude Include="StepLoop.h" />
     <ClInclude Include="StepVertex.h" />
+    <ClInclude Include="UserPolygon.h" />
     <ClInclude Include="Window.h" />
   </ItemGroup>
   <ItemGroup>

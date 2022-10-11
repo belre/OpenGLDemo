@@ -29,7 +29,7 @@ static const char* fShader = "./Shaders/shader.frag";
 
 static const char* stepPath = "./StepData/step_elements.csv";
 
-static void CreateObjects()
+static void CreateObjects(StepData& step_data)
 {
 	unsigned int indices[] = {
 		0, 3, 1,
@@ -76,7 +76,7 @@ int RunStepPractice()
 	step_data.ReadFromTextData(stepPath);
 
 
-	CreateObjects();
+	CreateObjects(step_data);
 	CreateShaders();
 
 	GLuint uniformProjection = 0;

@@ -69,6 +69,9 @@
     <ClCompile Include="StepLoop.cpp">
       <Filter>Source Files\STEP</Filter>
     </ClCompile>
+    <ClCompile Include="UserPolygon.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GlCommon.h">
@@ -102,6 +105,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="StepLoop.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="UserPolygon.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

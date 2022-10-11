@@ -43,7 +43,8 @@ void StepData::ReadFromTextData(std::string path)
 				StepEdge edge;
 				edge.ParseLine(text.substr(std::distance(text.begin(), split_iter) + 1));
 
-				if(edge.GetPattern() == StepEdge::LINE) {
+				if(edge.GetPattern() == StepEdge::LINE || edge.GetPattern() == StepEdge::UNKNOWN) 
+				{
 					StepEdgeLine edge_line;
 					edge_line.ParseLine(text.substr(std::distance(text.begin(), split_iter) + 1));
 
