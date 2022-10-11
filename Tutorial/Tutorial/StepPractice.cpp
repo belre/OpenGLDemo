@@ -138,7 +138,7 @@ int RunStepPractice()
 		(GLfloat)mainWindow.getRecommendedAspect(),
 		0.1f, 100.0f);
 */
-	glm::mat4 projection  = glm::ortho(-50.0f, 50.f, 50.0f, -50.0f, -100.0f, 100.0f);
+	glm::mat4 projection  = glm::ortho(-30.0f, 30.f, 30.0f, -30.0f, -100.0f, 100.0f);
 
 	// loop until window closed
 	while (!mainWindow.getShouldClose())
