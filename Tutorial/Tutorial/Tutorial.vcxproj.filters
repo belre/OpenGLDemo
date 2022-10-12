@@ -128,4 +128,12 @@
       <Filter>Texts</Filter>
     </CopyFileToFolders>
   </ItemGroup>
+  <ItemGroup>
+    <None Include="StepData\BSP35B20-N-12.stp.csv">
+      <Filter>Texts</Filter>
+    </None>
+    <None Include="StepData\KANA_NK35B10D9_K.stp.csv">
+      <Filter>Texts</Filter>
+    </None>
+  </ItemGroup>
 </Project>
