@@ -6,6 +6,8 @@ int RunTransform();
 int RunBasicOperation();
 int RunBasicCleanUp();
 int RunCameraSample();
+int RunTextureSample();
 
 int RunStepPractice();
+
 

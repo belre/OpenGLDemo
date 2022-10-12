@@ -161,6 +161,8 @@
     <ClCompile Include="StepLoop.cpp" />
     <ClCompile Include="StepPractice.cpp" />
     <ClCompile Include="StepVertex.cpp" />
+    <ClCompile Include="Texture.cpp" />
+    <ClCompile Include="TextureSample.cpp" />
     <ClCompile Include="Transform.cpp" />
     <ClCompile Include="Tutorial.cpp" />
     <ClCompile Include="UserPolygon.cpp" />
@@ -178,6 +180,7 @@
     <ClInclude Include="StepEdgeLine.h" />
     <ClInclude Include="StepLoop.h" />
     <ClInclude Include="StepVertex.h" />
+    <ClInclude Include="Texture.h" />
     <ClInclude Include="UserPolygon.h" />
     <ClInclude Include="Window.h" />
   </ItemGroup>
@@ -210,6 +213,16 @@
   <ItemGroup>
     <None Include="StepData\BSP35B20-N-12.stp.csv" />
     <None Include="StepData\KANA_NK35B10D9_K.stp.csv" />
+  </ItemGroup>
+  <ItemGroup>
+    <CopyFileToFolders Include="Textures\brick.png">
+      <DestinationFolders Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(OutDir)Textures</DestinationFolders>
+    </CopyFileToFolders>
+    <CopyFileToFolders Include="Textures\dirt.png">
+      <DeploymentContent Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+      </DeploymentContent>
+      <DestinationFolders Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(OutDir)Textures</DestinationFolders>
+    </CopyFileToFolders>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

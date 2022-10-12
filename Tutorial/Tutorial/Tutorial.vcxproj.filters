@@ -19,6 +19,9 @@
     <Filter Include="Source Files\STEP">
       <UniqueIdentifier>{4f9d7bc8-834a-4271-a4c2-7381bb0a83cf}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Textures">
+      <UniqueIdentifier>{7cd75840-9f09-4033-9cae-818348bc468d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Tutorial.cpp">
@@ -72,6 +75,12 @@
     <ClCompile Include="UserPolygon.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="TextureSample.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Texture.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GlCommon.h">
@@ -110,6 +119,9 @@
     <ClInclude Include="UserPolygon.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Texture.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <CopyFileToFolders Include="Shaders\shader.frag">
@@ -126,6 +138,12 @@
     </CopyFileToFolders>
     <CopyFileToFolders Include="Shaders\user_shader.vert">
       <Filter>Texts</Filter>
+    </CopyFileToFolders>
+    <CopyFileToFolders Include="Textures\brick.png">
+      <Filter>Textures</Filter>
+    </CopyFileToFolders>
+    <CopyFileToFolders Include="Textures\dirt.png">
+      <Filter>Textures</Filter>
     </CopyFileToFolders>
   </ItemGroup>
   <ItemGroup>
