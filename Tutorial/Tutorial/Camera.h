@@ -1,6 +1,7 @@
 #pragma once
 
 #include <GL\glew.h>
+#include <GLFW/glfw3.h>
 
 #include <GLM\glm.hpp>
 #include <GLM\gtc\matrix_transform.hpp>
@@ -14,7 +15,9 @@ public:
 
 	void keyControl(bool* keys, GLfloat delta_time);
 	void mouseControl(GLfloat change_x, GLfloat change_y);
-	
+
+	glm::vec3 getCameraPosition();
+
 	glm::mat4 calculateViewMatrix();
 
 	virtual ~Camera();

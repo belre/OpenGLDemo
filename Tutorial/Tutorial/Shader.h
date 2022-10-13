@@ -31,6 +31,11 @@ public:
 
 	GLuint GetDirectionLocation();
 
+	GLuint GetEyePositionLocation();
+
+	GLuint GetSpecularIntensityLocation();
+
+	GLuint GetShininessLocation();
 
 	void UseShader();
 
@@ -40,6 +45,9 @@ private:
 	GLuint _shaderId, _uniformProjection, _uniformModel, _uniformView;
 	GLuint _uniformAmbientIntensity, _uniformAmbientColor;
 	GLuint _uniformDiffuseIntensity, _uniformDirection;
+
+	GLuint _uniformEyePosition;
+	GLuint _uniformSpecularIntensity, _uniformShininess;
 
 	void CompileShader(const char* vertex_code, const char* fragment_code);
 

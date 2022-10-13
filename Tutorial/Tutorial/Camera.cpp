@@ -1,5 +1,4 @@
 #include "Camera.h"
-#include <GLFW/glfw3.h>
 
 Camera::Camera(glm::vec3 position, glm::vec3 up, GLfloat yaw, GLfloat pitch, GLfloat movement_speed, GLfloat turn_speed)
 {
@@ -61,6 +60,11 @@ void Camera::mouseControl(GLfloat change_x, GLfloat change_y)
 	update();
 }
 
+
+glm::vec3 Camera::getCameraPosition()
+{
+	return _position;
+}
 
 glm::mat4 Camera::calculateViewMatrix()
 {

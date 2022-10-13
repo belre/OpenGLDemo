@@ -2,6 +2,18 @@
 #include <iostream>
 #include "Window.h"
 
+Window::Window()
+{
+	_width = 800;
+	_height = 600;
+	_changeX = 0.0f;
+	_changeY = 0.0f;
+
+	for (size_t i = 0; i < 1024; i++)
+	{
+		_keys[i] = false;
+	}
+}
 
 Window::Window(GLint windowWidth, GLint windowHeight)
 {
