@@ -13,7 +13,8 @@ int main()
 	//RunBasicOperation();
 	//RunBasicCleanUp();
 	//RunCameraSample();
-	RunTextureSample();
+	//RunTextureSample();
+	RunLightSample();
 
 	//RunStepPractice();
 

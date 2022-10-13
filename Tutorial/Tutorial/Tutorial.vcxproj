@@ -153,6 +153,7 @@
     <ClCompile Include="BasicOperation.cpp" />
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="CameraSample.cpp" />
+    <ClCompile Include="LightSample.cpp" />
     <ClCompile Include="Mesh.cpp" />
     <ClCompile Include="Shader.cpp" />
     <ClCompile Include="StepData.cpp" />

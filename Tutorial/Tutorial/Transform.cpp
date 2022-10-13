@@ -6,6 +6,7 @@
 
 #include <iostream>
 #include <stdlib.h>
+#include <math.h>
 
 #include <GLM/mat4x4.hpp>
 #include <GLM/gtc/matrix_transform.hpp>

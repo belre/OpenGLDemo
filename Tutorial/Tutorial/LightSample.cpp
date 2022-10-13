@@ -45,7 +45,7 @@ static void CreateObjects()
 		// x, y, z, u, v
 		-1.0f, -1.0f, 0.0f, 0.0f, 0.0f,
 		0.0f, -1.0f, 1.0f, 0.5f, 0.0f,
-		1.0f, -1.0f, 0.0f, 1.0f, 0.0f, 
+		1.0f, -1.0f, 0.0f, 1.0f, 0.0f,
 		0.0f, 1.0f, 0.0f, 0.5f, 1.0f
 	};
 
@@ -66,7 +66,7 @@ static void CreateShaders()
 }
 
 
-int RunTextureSample()
+int RunLightSample()
 {
 	Window mainWindow(800, 600);
 	mainWindow.Initialize();

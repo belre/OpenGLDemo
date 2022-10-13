@@ -1,10 +1,9 @@
 #pragma once
-#pragma once
 
 #include <string>
 #include <GL/glew.h>
 
-#include "stb_image.h"
+
 
 
 class Texture
