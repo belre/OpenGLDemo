@@ -14,9 +14,9 @@ int main()
 	//RunBasicCleanUp();
 	//RunCameraSample();
 	//RunTextureSample();
-	RunLightSample();
+	//RunLightSample();
 
-	//RunStepPractice();
+	RunStepPractice();
 
 
 	return 0;

@@ -13,6 +13,7 @@
 #include "Shader.h"
 #include "Window.h"
 #include "Camera.h"
+#include "OrthoCamera.h"
 #include "StepData.h"
 #include "UserPolygon.h"
 
@@ -117,10 +118,10 @@ int RunStepPractice()
 	Window mainWindow(600, 600);
 	mainWindow.Initialize();
 
-	Camera camera(
+	OrthoCamera camera(
 		glm::vec3(0.0f, 0.0f, 0.0f),
 		glm::vec3(0.0f, 1.0f, 0.0f),
-		-90.0f, 0.0f, 5.0f, 0.4f);
+		-90.0f, 0.0f, 20.0f, 0.4f);
 
 	StepData step_data;
 	step_data.ReadFromTextData(stepPath);
@@ -132,12 +133,6 @@ int RunStepPractice()
 	GLuint uniformModel = 0;
 	GLuint uniformView = 0;
 
-
-	/*
-	glm::mat4 projection = glm::perspective(45.0f,
-		(GLfloat)mainWindow.getRecommendedAspect(),
-		0.1f, 100.0f);
-*/
 	glm::mat4 projection  = glm::ortho(-80.0f, 80.f, 80.0f, -80.0f, -100.0f, 100.0f);
 
 	// loop until window closed
@@ -163,9 +158,6 @@ int RunStepPractice()
 		uniformView = shaderLists[0]->GetViewLocation();
 
 		glm::mat4 model(1.0f);
-		//model = glm::translate(model, glm::vec3(0.0f, 0.0f, -2.5f));
-		//model = glm::rotate(model, curAngle * toRadians, glm::vec3(0.0f, 1.0f, 0.0f));
-		//model = glm::scale(model, glm::vec3(0.4f, 0.4f, 1.0));
 		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
 		glUniformMatrix4fv(uniformProjection, 1, GL_FALSE, glm::value_ptr(projection));
 		glUniformMatrix4fv(uniformView, 1, GL_FALSE, glm::value_ptr(camera.calculateViewMatrix()));
