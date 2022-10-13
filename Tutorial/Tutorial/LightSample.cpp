@@ -15,12 +15,15 @@
 #include "Window.h"
 #include "Camera.h"
 #include "Texture.h"
+#include "Light.h"
 
 static std::vector<Mesh*> meshLists;
 static std::vector<Shader*> shaderLists;
 
 static Texture* brickTexture;
 static Texture* dirtTexture;
+
+static Light* mainLight;
 
 static GLfloat deltaTime = 0.0f;
 static GLfloat lastTime = 0.0f;
@@ -81,12 +84,16 @@ int RunLightSample()
 	dirtTexture = new Texture("Textures/dirt.png");
 	dirtTexture->LoadTexture();
 
+	mainLight = new Light(1.0f, 1.0f, 1.0f, 0.2f);
+	
 	CreateObjects();
 	CreateShaders();
 
 	GLuint uniformProjection = 0;
 	GLuint uniformModel = 0;
 	GLuint uniformView = 0;
+	GLuint uniformAmbientIntensity = 0;
+	GLuint uniformAmbientColor = 0;
 
 	glm::mat4 projection = glm::perspective(45.0f,
 		(GLfloat)mainWindow.getRecommendedAspect(),
@@ -113,6 +120,10 @@ int RunLightSample()
 		uniformModel = shaderLists[0]->GetModelLocation();
 		uniformProjection = shaderLists[0]->GetProjectionLocation();
 		uniformView = shaderLists[0]->GetViewLocation();
+		uniformAmbientColor = shaderLists[0]->GetAmbientColorLocation();
+		uniformAmbientIntensity = shaderLists[0]->GetAmbientIntensityLocation();
+
+		mainLight->UseLight(uniformAmbientIntensity, uniformAmbientColor);
 
 		glm::mat4 model(1.0f);
 		model = glm::translate(model, glm::vec3(0.0f, 0.0f, -2.5f));

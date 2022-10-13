@@ -41,7 +41,7 @@ void UserPolygon::Render()
 	glBindVertexArray(VAO);
 	
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, IBO);
-	glDrawElements(GL_LINES, _number_indices, GL_UNSIGNED_INT, nullptr);
+	glDrawElements(GL_TRIANGLE_FAN, _number_indices, GL_UNSIGNED_INT, nullptr);
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
 
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
