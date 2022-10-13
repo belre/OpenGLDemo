@@ -34,6 +34,51 @@ static const char* vShader = "./Shaders/shader.vert";
 // Fragment Shader
 static const char* fShader = "./Shaders/shader.frag";
 
+void CalcAverageNormals(unsigned int* indices, unsigned int indices_count, 
+	GLfloat* vertices, unsigned int vertices_count,
+	unsigned int v_length, unsigned int normal_offset)
+{
+	for(size_t i = 0 ; i < indices_count; i += 3 ) 
+	{
+		unsigned int in0 = indices[i] * v_length;
+		unsigned int in1 = indices[i+1] * v_length;
+		unsigned int in2 = indices[i+2] * v_length;
+
+		glm::vec3 v1(	vertices[in1] - vertices[in0],
+									vertices[in1+1] - vertices[in0+1], 
+									vertices[in1+2] - vertices[in0+2]);
+		glm::vec3 v2(vertices[in2] - vertices[in0],
+			vertices[in2 + 1] - vertices[in0 + 1],
+			vertices[in2 + 2] - vertices[in0 + 2]);
+
+		glm::vec3 normal = glm::normalize(glm::cross(v1, v2));
+
+		in0 += normal_offset;
+		in1 += normal_offset;
+		in2 += normal_offset;
+		vertices[in0] += normal.x;
+		vertices[in0 + 1] += normal.y;
+		vertices[in0 + 2] += normal.z;
+
+		vertices[in1] += normal.x;
+		vertices[in1 + 1] += normal.y;
+		vertices[in1 + 2] += normal.z;
+
+		vertices[in2] += normal.x;
+		vertices[in2 + 1] += normal.y;
+		vertices[in2 + 2] += normal.z;
+	}
+
+	for(size_t i = 0; i < vertices_count / v_length; i++ ) 
+	{
+		unsigned int n_offset = i * v_length + normal_offset;
+		glm::vec3 vec(vertices[n_offset], vertices[n_offset + 1], vertices[n_offset + 2]);
+		vec = glm::normalize(vec);
+		vertices[n_offset] = vec.x;
+		vertices[n_offset+1] = vec.y;
+		vertices[n_offset+2] = vec.z;
+	}
+}
 
 static void CreateObjects()
 {
@@ -45,19 +90,21 @@ static void CreateObjects()
 	};
 
 	GLfloat vertices[] = {
-		// x, y, z, u, v
-		-1.0f, -1.0f, 0.0f, 0.0f, 0.0f,
-		0.0f, -1.0f, 1.0f, 0.5f, 0.0f,
-		1.0f, -1.0f, 0.0f, 1.0f, 0.0f,
-		0.0f, 1.0f, 0.0f, 0.5f, 1.0f
+		// x, y, z, u, v, nx, ny, nz
+		-1.0f, -1.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f,
+		0.0f, -1.0f, 1.0f, 0.5f, 0.0f, 0.0f, 0.0f, 0.0f,
+		1.0f, -1.0f, 0.0f, 1.0f, 0.0f, 0.0f, 0.0f, 0.0f,
+		0.0f, 1.0f, 0.0f, 0.5f, 1.0f, 0.0f, 0.0f, 0.0f,
 	};
 
+	CalcAverageNormals(indices, 12, vertices, 12, 8, 5);
+
 	Mesh* obj1 = new Mesh();
-	obj1->CreateMesh(vertices, indices, 20, 12);
+	obj1->CreateMesh(vertices, indices, 8 * 4, 12);
 	meshLists.push_back(obj1);
 
 	Mesh* obj2 = new Mesh();
-	obj2->CreateMesh(vertices, indices, 20, 12);
+	obj2->CreateMesh(vertices, indices, 8 * 4, 12);
 	meshLists.push_back(obj2);
 }
 
@@ -84,7 +131,9 @@ int RunLightSample()
 	dirtTexture = new Texture("Textures/dirt.png");
 	dirtTexture->LoadTexture();
 
-	mainLight = new Light(1.0f, 1.0f, 1.0f, 0.2f);
+	mainLight = new Light(
+		1.0f, 1.0f, 1.0f, 0.2f, 
+		2.0f, -1.0f, -2.0f, 1.0f);
 	
 	CreateObjects();
 	CreateShaders();
@@ -94,6 +143,8 @@ int RunLightSample()
 	GLuint uniformView = 0;
 	GLuint uniformAmbientIntensity = 0;
 	GLuint uniformAmbientColor = 0;
+	GLuint uniformDirection = 0;
+	GLuint uniformDiffuseIntensity = 0;
 
 	glm::mat4 projection = glm::perspective(45.0f,
 		(GLfloat)mainWindow.getRecommendedAspect(),
@@ -122,8 +173,11 @@ int RunLightSample()
 		uniformView = shaderLists[0]->GetViewLocation();
 		uniformAmbientColor = shaderLists[0]->GetAmbientColorLocation();
 		uniformAmbientIntensity = shaderLists[0]->GetAmbientIntensityLocation();
+		uniformDirection = shaderLists[0]->GetDirectionLocation();
+		uniformDiffuseIntensity = shaderLists[0]->GetDiffuseIntensityLocation();
 
-		mainLight->UseLight(uniformAmbientIntensity, uniformAmbientColor);
+		mainLight->UseLight(uniformAmbientIntensity, uniformAmbientColor, 
+			uniformDiffuseIntensity, uniformDirection);
 
 		glm::mat4 model(1.0f);
 		model = glm::translate(model, glm::vec3(0.0f, 0.0f, -2.5f));
