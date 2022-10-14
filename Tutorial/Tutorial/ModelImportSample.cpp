@@ -21,6 +21,10 @@
 #include "PointLight.h"
 #include "Material.h"
 
+#include <assimp\Importer.hpp>
+
+#include "Model.h"
+
 static std::vector<Mesh*> meshLists;
 static std::vector<Shader*> shaderLists;
 
@@ -34,6 +38,8 @@ static SpotLight spotLights[MAX_SPOT_LIGHTS];
 
 static Material* shinyMaterial;
 static Material* dullMaterial;
+
+static Model* holo;
 
 static GLfloat deltaTime = 0.0f;
 static GLfloat lastTime = 0.0f;
@@ -165,18 +171,20 @@ int RunModelImportSample()
 		-60.0f, 0.0f, 5.0f, 0.4f);
 
 	brickTexture = new Texture("Textures/brick.png");
-	brickTexture->LoadTexture();
+	brickTexture->LoadTextureAlpha();
 	dirtTexture = new Texture("Textures/dirt.png");
-	dirtTexture->LoadTexture();
+	dirtTexture->LoadTextureAlpha();
 	plainTexture = new Texture("Textures/plain.png");
-	plainTexture->LoadTexture();
+	plainTexture->LoadTextureAlpha();
 
 	shinyMaterial = new Material(4.0f, 256);
 	dullMaterial = new Material(0.3f, 4);
 
+	holo = new Model();
+	holo->LoadModel("./Models/holo.obj");
 
 	mainLight = new DirectionalLight(
-		1.0f, 1.0f, 1.0f, 0.0f, 0.0f,
+		1.0f, 1.0f, 1.0f, 0.2f, 0.4f,
 		0.0f, 0.0f, -1.0f);
 
 	unsigned int pointLightCount = 0;
@@ -225,6 +233,8 @@ int RunModelImportSample()
 		(GLfloat)mainWindow.getRecommendedAspect(),
 		0.1f, 100.0f);
 
+	Assimp::Importer importer;
+
 	// loop until window closed
 	while (!mainWindow.getShouldClose())
 	{
@@ -252,7 +262,7 @@ int RunModelImportSample()
 
 		glm::vec3 lowerLight = camera.getCameraPosition();
 		lowerLight.y -= 0.3f;
-		spotLights[0].SetFlash(lowerLight, camera.getCameraDirection());
+		//spotLights[0].SetFlash(lowerLight, camera.getCameraDirection());
 
 		shaderLists[0]->SetDirectionalLight(mainLight);
 		shaderLists[0]->SetPointLights(pointLights, pointLightCount);
@@ -283,6 +293,10 @@ int RunModelImportSample()
 		dirtTexture->UseTexture();
 		shinyMaterial->UseMaterial(uniformSpecularIntensity, uniformShininess);
 		meshLists[2]->RenderMesh();
+
+		model = glm::scale(model, glm::vec3(1e-1, 1e-1, 1e-1));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		holo->RenderModel();
 
 		glUseProgram(0);
 
