@@ -161,6 +161,7 @@
     <ClCompile Include="OrthoCamera.cpp" />
     <ClCompile Include="PointLight.cpp" />
     <ClCompile Include="Shader.cpp" />
+    <ClCompile Include="SpotLight.cpp" />
     <ClCompile Include="StepData.cpp" />
     <ClCompile Include="StepEdge.cpp" />
     <ClCompile Include="StepEdgeLine.cpp" />
@@ -187,6 +188,7 @@
     <ClInclude Include="OrthoCamera.h" />
     <ClInclude Include="PointLight.h" />
     <ClInclude Include="Shader.h" />
+    <ClInclude Include="SpotLight.h" />
     <ClInclude Include="StepData.h" />
     <ClInclude Include="StepEdge.h" />
     <ClInclude Include="StepEdgeLine.h" />

@@ -30,6 +30,7 @@ static Texture* plainTexture;
 
 static DirectionalLight* mainLight;
 static PointLight pointLights[MAX_POINT_LIGHTS];
+static SpotLight spotLights[MAX_SPOT_LIGHTS];
 
 static Material* shinyMaterial;
 static Material* dullMaterial;
@@ -175,22 +176,42 @@ int RunLightSample()
 
 
 	mainLight = new DirectionalLight(
-		1.0f, 1.0f, 1.0f, 0.1f, 0.3f,
+		1.0f, 1.0f, 1.0f, 0.0f, 0.0f,
 		0.0f, 0.0f, -1.0f);
 
 	unsigned int pointLightCount = 0;
 	pointLights[0] = PointLight(0.0f, 0.0f, 1.0f,
-		0.0f, 1.0f,
+		0.0f, 0.1f,
 		0.0f, 0.0f, 0.0f,
 		0.3f, 0.2f, 0.1f);
 	pointLightCount++;
 
 	pointLights[1] = PointLight(0.0f, 1.0f, 0.0f,
-		0.0f, 1.0f,
+		0.0f, 0.1f,
 		-4.0f, 2.0f, 0.0f,
 		0.3f, 0.1f, 0.1f);
 	pointLightCount++;
 
+	pointLightCount = 0;
+
+	unsigned int spotLightCount = 0;
+	spotLights[0] = SpotLight(
+		1.0f, 1.0f, 1.0f,
+		0.0f, 2.0f,
+		0.0f, 0.0f, 0.0f,
+		0.0f, -1.0f, 0.0f,
+		1.0f, 0.0f, 0.0f, 
+		20.0f);
+	spotLightCount++;
+
+	spotLights[1] = SpotLight(
+		1.0f, 1.0f, 1.0f,
+		0.0f, 1.0f,
+		0.0f, 1.5f, 0.0f,
+		-100.0f, -1.0f, 0.0f,
+		1.0f, 0.0f, 0.0f,
+		20.0f);
+	spotLightCount++;
 
 	GLuint uniformProjection = 0;
 	GLuint uniformModel = 0;
@@ -229,9 +250,13 @@ int RunLightSample()
 		uniformSpecularIntensity = shaderLists[0]->GetSpecularIntensityLocation();
 		uniformShininess = shaderLists[0]->GetShininessLocation();
 
+		glm::vec3 lowerLight = camera.getCameraPosition();
+		lowerLight.y -= 0.3f;
+		spotLights[0].SetFlash(lowerLight, camera.getCameraDirection());
 
 		shaderLists[0]->SetDirectionalLight(mainLight);
 		shaderLists[0]->SetPointLights(pointLights, pointLightCount);
+		shaderLists[0]->SetSpotLights(spotLights, spotLightCount);
 
 		glm::mat4 model(1.0f);
 		model = glm::translate(model, glm::vec3(0.0f, 0.0f, -2.5f));
@@ -255,11 +280,9 @@ int RunLightSample()
 		model = glm::mat4(1.0f);
 		model = glm::translate(model, glm::vec3(0.0f, -2.0f, 0.0f));
 		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
-		plainTexture->UseTexture();
+		dirtTexture->UseTexture();
 		shinyMaterial->UseMaterial(uniformSpecularIntensity, uniformShininess);
 		meshLists[2]->RenderMesh();
-
-
 
 		glUseProgram(0);
 

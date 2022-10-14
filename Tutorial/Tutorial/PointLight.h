@@ -9,16 +9,14 @@ public:
 						GLfloat x_pos , GLfloat y_pos, GLfloat z_pos,
 						GLfloat coef_con, GLfloat coef_lin, GLfloat coef_exp);
 
-	void UseLight(GLfloat ambientIntensityLocation, GLfloat ambientColorLocation,
-		GLfloat diffuseIntensityLocation, 
-		GLfloat positionLocation,
-		GLfloat constantLocation, GLfloat linearLocation, GLfloat exponentLocation);
-
-
+	void UseLight(GLuint ambientIntensityLocation, GLuint ambientColorLocation,
+		GLuint diffuseIntensityLocation,
+		GLuint positionLocation,
+		GLuint constantLocation, GLuint linearLocation, GLuint exponentLocation);
 
 	virtual ~PointLight();
 
-private:
+protected:
 	glm::vec3 _position;
 
 	GLfloat _coef_constant, _coef_linear, _coef_exponent;
