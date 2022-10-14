@@ -181,6 +181,9 @@
     <CopyFileToFolders Include="Textures\dirt.png">
       <Filter>Textures</Filter>
     </CopyFileToFolders>
+    <CopyFileToFolders Include="Textures\plain.png">
+      <Filter>Textures</Filter>
+    </CopyFileToFolders>
   </ItemGroup>
   <ItemGroup>
     <None Include="StepData\BSP35B20-N-12.stp.csv">

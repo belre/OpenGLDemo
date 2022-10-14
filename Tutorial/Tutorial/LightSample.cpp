@@ -26,6 +26,7 @@ static std::vector<Shader*> shaderLists;
 
 static Texture* brickTexture;
 static Texture* dirtTexture;
+static Texture* plainTexture;
 
 static DirectionalLight* mainLight;
 static PointLight pointLights[MAX_POINT_LIGHTS];
@@ -114,6 +115,18 @@ static void CreateObjects()
 		0.0f, 1.0f, -0.0f, 0.5f, 1.0f, 0.0f, 0.0f, 0.0f,
 	};
 
+	unsigned int floor_indices[] = {
+		0, 2, 1,
+		1, 2, 3
+	};
+
+	GLfloat floor_vertices[] = {
+		-10.0f, 0.0f, -10.0f,	0.0f, 0.0f,		0.0f, -1.0f, 0.0f,
+		10.0f, 0.0f, -10.0f,	10.0f, 0.0f,	0.0f, -1.0f, 0.0f,
+		-10.0f, 0.0f, 10.0f,	0.0f, 10.0f,	0.0f, -1.0f, 0.0f,
+		10.0f, 0.0f, 10.0f,		10.0f, 10.0f,	0.0f, -1.0f, 0.0f
+	};
+
 	CalcAverageNormals(indices, 12, vertices, 8 * 4, 8, 5);
 
 	Mesh* obj1 = new Mesh();
@@ -123,6 +136,10 @@ static void CreateObjects()
 	Mesh* obj2 = new Mesh();
 	obj2->CreateMesh(vertices, indices, 8 * 4, 12);
 	meshLists.push_back(obj2);
+
+	Mesh* obj3 = new Mesh();
+	obj3->CreateMesh(floor_vertices, floor_indices, 8 * 4, 6);
+	meshLists.push_back(obj3);
 }
 
 static void CreateShaders()
@@ -150,8 +167,10 @@ int RunLightSample()
 	brickTexture->LoadTexture();
 	dirtTexture = new Texture("Textures/dirt.png");
 	dirtTexture->LoadTexture();
+	plainTexture = new Texture("Textures/plain.png");
+	plainTexture->LoadTexture();
 
-	shinyMaterial = new Material(1.0f, 32);
+	shinyMaterial = new Material(4.0f, 256);
 	dullMaterial = new Material(0.3f, 4);
 
 
@@ -159,13 +178,19 @@ int RunLightSample()
 		1.0f, 1.0f, 1.0f, 0.1f, 0.3f,
 		0.0f, 0.0f, -1.0f);
 
-
 	unsigned int pointLightCount = 0;
-	pointLights[0] = PointLight(0.0f, 1.0f, 0.0f,
-		0.1f, 1.0f,
-		-4.0f, 0.0f, 0.0f,
+	pointLights[0] = PointLight(0.0f, 0.0f, 1.0f,
+		0.0f, 1.0f,
+		0.0f, 0.0f, 0.0f,
 		0.3f, 0.2f, 0.1f);
 	pointLightCount++;
+
+	pointLights[1] = PointLight(0.0f, 1.0f, 0.0f,
+		0.0f, 1.0f,
+		-4.0f, 2.0f, 0.0f,
+		0.3f, 0.1f, 0.1f);
+	pointLightCount++;
+
 
 	GLuint uniformProjection = 0;
 	GLuint uniformModel = 0;
@@ -226,6 +251,15 @@ int RunLightSample()
 		dirtTexture->UseTexture();
 		dullMaterial->UseMaterial(uniformSpecularIntensity, uniformShininess);
 		meshLists[1]->RenderMesh();
+
+		model = glm::mat4(1.0f);
+		model = glm::translate(model, glm::vec3(0.0f, -2.0f, 0.0f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		plainTexture->UseTexture();
+		shinyMaterial->UseMaterial(uniformSpecularIntensity, uniformShininess);
+		meshLists[2]->RenderMesh();
+
+
 
 		glUseProgram(0);
 

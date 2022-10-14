@@ -236,6 +236,11 @@
       <DestinationFolders Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(OutDir)Textures</DestinationFolders>
     </CopyFileToFolders>
   </ItemGroup>
+  <ItemGroup>
+    <CopyFileToFolders Include="Textures\plain.png">
+      <DestinationFolders Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(OutDir)Textures</DestinationFolders>
+    </CopyFileToFolders>
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
