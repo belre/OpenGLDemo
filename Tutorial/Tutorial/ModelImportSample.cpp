@@ -44,7 +44,7 @@ static const char* vShader = "./Shaders/shader.vert";
 // Fragment Shader
 static const char* fShader = "./Shaders/shader.frag";
 
-static void CalcAverageNormals(unsigned int* indices, unsigned int indices_count, 
+static void CalcAverageNormals(unsigned int* indices, unsigned int indices_count,
 	GLfloat* vertices, unsigned int vertices_count,
 	unsigned int v_length, unsigned int normal_offset)
 {
@@ -56,15 +56,15 @@ static void CalcAverageNormals(unsigned int* indices, unsigned int indices_count
 		vertices[n_offset + 2] = 0.0f;
 	}
 
-	for(size_t i = 0 ; i < indices_count; i += 3 ) 
+	for (size_t i = 0; i < indices_count; i += 3)
 	{
 		unsigned int in0 = indices[i] * v_length;
-		unsigned int in1 = indices[i+1] * v_length;
-		unsigned int in2 = indices[i+2] * v_length;
+		unsigned int in1 = indices[i + 1] * v_length;
+		unsigned int in2 = indices[i + 2] * v_length;
 
-		glm::vec3 v1(	vertices[in1] - vertices[in0],
-									vertices[in1+1] - vertices[in0+1], 
-									vertices[in1+2] - vertices[in0+2]);
+		glm::vec3 v1(vertices[in1] - vertices[in0],
+			vertices[in1 + 1] - vertices[in0 + 1],
+			vertices[in1 + 2] - vertices[in0 + 2]);
 		glm::vec3 v2(vertices[in2] - vertices[in0],
 			vertices[in2 + 1] - vertices[in0 + 1],
 			vertices[in2 + 2] - vertices[in0 + 2]);
@@ -88,14 +88,14 @@ static void CalcAverageNormals(unsigned int* indices, unsigned int indices_count
 		vertices[in2 + 2] += normal.z;
 	}
 
-	for(size_t i = 0; i < vertices_count / v_length; i++ ) 
+	for (size_t i = 0; i < vertices_count / v_length; i++)
 	{
 		unsigned int n_offset = i * v_length + normal_offset;
 		glm::vec3 vec(vertices[n_offset], vertices[n_offset + 1], vertices[n_offset + 2]);
 		vec = glm::normalize(vec);
 		vertices[n_offset] = vec.x;
-		vertices[n_offset+1] = vec.y;
-		vertices[n_offset+2] = vec.z;
+		vertices[n_offset + 1] = vec.y;
+		vertices[n_offset + 2] = vec.z;
 	}
 }
 
@@ -151,7 +151,7 @@ static void CreateShaders()
 }
 
 
-int RunLightSample()
+int RunModelImportSample()
 {
 	Window mainWindow = Window();
 	mainWindow = Window(1366, 768); // 1280, 1024 or 1024, 768
@@ -200,7 +200,7 @@ int RunLightSample()
 		0.0f, 2.0f,
 		0.0f, 0.0f, 0.0f,
 		0.0f, -1.0f, 0.0f,
-		1.0f, 0.0f, 0.0f, 
+		1.0f, 0.0f, 0.0f,
 		20.0f);
 	spotLightCount++;
 

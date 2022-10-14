@@ -8,6 +8,7 @@ int RunBasicCleanUp();
 int RunCameraSample();
 int RunTextureSample();
 int RunLightSample();
+int RunModelImportSample();
 
 int RunStepPractice();
 
