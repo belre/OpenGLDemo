@@ -12,7 +12,9 @@ public:
 	Texture();
 	Texture(std::string file_location);
 
-	void LoadTexture();
+	bool LoadTexture();
+	bool LoadTextureAlpha();
+
 	void UseTexture();
 	void ClearTexture();
 
