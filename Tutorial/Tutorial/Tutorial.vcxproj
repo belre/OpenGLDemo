@@ -153,6 +153,7 @@
     <ClCompile Include="BasicOperation.cpp" />
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="CameraSample.cpp" />
+    <ClCompile Include="DirectionalLight.cpp" />
     <ClCompile Include="Light.cpp" />
     <ClCompile Include="LightSample.cpp" />
     <ClCompile Include="Material.cpp" />
@@ -175,6 +176,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Camera.h" />
+    <ClInclude Include="DirectionalLight.h" />
     <ClInclude Include="GlCommon.h" />
     <ClInclude Include="GlProgramSource.h" />
     <ClInclude Include="Light.h" />

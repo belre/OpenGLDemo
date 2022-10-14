@@ -14,6 +14,7 @@
 #include "Shader.h"
 #include "Window.h"
 #include "Camera.h"
+#include "DirectionalLight.h"
 #include "Texture.h"
 #include "Light.h"
 #include "Material.h"
@@ -23,7 +24,7 @@ static std::vector<Shader*> shaderLists;
 static Texture* brickTexture;
 static Texture* dirtTexture;
 
-static Light* mainLight;
+static DirectionalLight* mainLight;
 
 static Material* shinyMaterial;
 static Material* dullMaterial;
@@ -149,9 +150,9 @@ int RunLightSample()
 	shinyMaterial = new Material(1.0f, 32);
 	dullMaterial = new Material(0.3f, 4);
 
-	mainLight = new Light(
-		1.0f, 1.0f, 1.0f, 0.1f,
-		0.0f, 0.0f, -1.0f, 0.3f);
+	mainLight = new DirectionalLight(
+		1.0f, 1.0f, 1.0f, 0.1f, 0.3f,
+		0.0f, 0.0f, -1.0f);
 
 
 	GLuint uniformProjection = 0;
