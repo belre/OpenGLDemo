@@ -10,14 +10,17 @@
 #include <GLM/gtc/matrix_transform.hpp>
 #include <GLM/gtc/type_ptr.hpp>
 
+#include "CommonValue.h"
+
 #include "Mesh.h"
 #include "Shader.h"
 #include "Window.h"
 #include "Camera.h"
 #include "DirectionalLight.h"
 #include "Texture.h"
-#include "Light.h"
+#include "PointLight.h"
 #include "Material.h"
+
 static std::vector<Mesh*> meshLists;
 static std::vector<Shader*> shaderLists;
 
@@ -25,6 +28,7 @@ static Texture* brickTexture;
 static Texture* dirtTexture;
 
 static DirectionalLight* mainLight;
+static PointLight pointLights[MAX_POINT_LIGHTS];
 
 static Material* shinyMaterial;
 static Material* dullMaterial;
@@ -150,19 +154,24 @@ int RunLightSample()
 	shinyMaterial = new Material(1.0f, 32);
 	dullMaterial = new Material(0.3f, 4);
 
+
 	mainLight = new DirectionalLight(
 		1.0f, 1.0f, 1.0f, 0.1f, 0.3f,
 		0.0f, 0.0f, -1.0f);
 
 
+	unsigned int pointLightCount = 0;
+	pointLights[0] = PointLight(0.0f, 1.0f, 0.0f,
+		0.1f, 1.0f,
+		-4.0f, 0.0f, 0.0f,
+		0.3f, 0.2f, 0.1f);
+	pointLightCount++;
+
 	GLuint uniformProjection = 0;
 	GLuint uniformModel = 0;
 	GLuint uniformView = 0;
 	GLuint uniformEyePosition = 0;
-	GLuint uniformAmbientIntensity = 0;
-	GLuint uniformAmbientColor = 0;
-	GLuint uniformDirection = 0;
-	GLuint uniformDiffuseIntensity = 0;
+
 	GLuint uniformSpecularIntensity = 0;
 	GLuint uniformShininess = 0;
 
@@ -191,16 +200,13 @@ int RunLightSample()
 		uniformModel = shaderLists[0]->GetModelLocation();
 		uniformProjection = shaderLists[0]->GetProjectionLocation();
 		uniformView = shaderLists[0]->GetViewLocation();
-		uniformAmbientColor = shaderLists[0]->GetAmbientColorLocation();
-		uniformAmbientIntensity = shaderLists[0]->GetAmbientIntensityLocation();
-		uniformDirection = shaderLists[0]->GetDirectionLocation();
-		uniformDiffuseIntensity = shaderLists[0]->GetDiffuseIntensityLocation();
 		uniformEyePosition = shaderLists[0]->GetEyePositionLocation();
 		uniformSpecularIntensity = shaderLists[0]->GetSpecularIntensityLocation();
 		uniformShininess = shaderLists[0]->GetShininessLocation();
 
-		mainLight->UseLight(uniformAmbientIntensity, uniformAmbientColor, 
-			uniformDiffuseIntensity, uniformDirection);
+
+		shaderLists[0]->SetDirectionalLight(mainLight);
+		shaderLists[0]->SetPointLights(pointLights, pointLightCount);
 
 		glm::mat4 model(1.0f);
 		model = glm::translate(model, glm::vec3(0.0f, 0.0f, -2.5f));

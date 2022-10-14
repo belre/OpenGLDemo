@@ -159,6 +159,7 @@
     <ClCompile Include="Material.cpp" />
     <ClCompile Include="Mesh.cpp" />
     <ClCompile Include="OrthoCamera.cpp" />
+    <ClCompile Include="PointLight.cpp" />
     <ClCompile Include="Shader.cpp" />
     <ClCompile Include="StepData.cpp" />
     <ClCompile Include="StepEdge.cpp" />
@@ -176,6 +177,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Camera.h" />
+    <ClInclude Include="CommonValue.h" />
     <ClInclude Include="DirectionalLight.h" />
     <ClInclude Include="GlCommon.h" />
     <ClInclude Include="GlProgramSource.h" />
@@ -183,6 +185,7 @@
     <ClInclude Include="Material.h" />
     <ClInclude Include="Mesh.h" />
     <ClInclude Include="OrthoCamera.h" />
+    <ClInclude Include="PointLight.h" />
     <ClInclude Include="Shader.h" />
     <ClInclude Include="StepData.h" />
     <ClInclude Include="StepEdge.h" />
