@@ -126,12 +126,12 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>C:\External Libs\glew-2.1.0-win32\include;C:\External Libs\glfw-3.3.8\include;C:\External Libs\glm;C:\External Libs\assimp\x64\include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ExternalLibraryPath)OpenGL\glew-2.1.0-win32\include;$(ExternalLibraryPath)OpenGL\glfw-3.3.8.bin.WIN64\include;$(ExternalLibraryPath)OpenGL\glm-0.9.9.8\glm\;$(ExternalLibraryPath)OpenGL\assimp-5.2.5\include</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>C:\External Libs\glew-2.1.0-win32\lib\Release\x64\;C:\External Libs\glfw-3.3.8.bin.WIN64\lib-vc2019\;C:\External Libs\assimp\x64\lib\Release;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(ExternalLibraryPath)OpenGL\glew-2.1.0-win32\lib\Release\x64\;$(ExternalLibraryPath)OpenGL\glfw-3.3.8.bin.WIN64\lib-vc2019\;$(ExternalLibraryPath)OpenGL\assimp-5.2.5\lib\Release;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalDependencies>opengl32.lib;glew32.lib;glfw3.lib;assimp-vc142-mt.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
