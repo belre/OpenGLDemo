@@ -9,6 +9,7 @@ int RunCameraSample();
 int RunTextureSample();
 int RunLightSample();
 int RunModelImportSample();
+int RunDirectionalShadowSample();
 
 int RunStepPractice();
 

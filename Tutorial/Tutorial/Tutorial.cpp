@@ -15,7 +15,8 @@ int main()
 	//RunCameraSample();
 	//RunTextureSample();
 	//RunLightSample();
-	RunModelImportSample();
+	//RunModelImportSample();
+	RunDirectionalShadowSample();
 
 	//RunStepPractice();
 
