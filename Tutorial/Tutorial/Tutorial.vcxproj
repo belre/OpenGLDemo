@@ -167,6 +167,7 @@
     <ClCompile Include="OrthoCamera.cpp" />
     <ClCompile Include="PointLight.cpp" />
     <ClCompile Include="Shader.cpp" />
+    <ClCompile Include="ShadowMap.cpp" />
     <ClCompile Include="SpotLight.cpp" />
     <ClCompile Include="StepData.cpp" />
     <ClCompile Include="StepEdge.cpp" />
@@ -195,6 +196,7 @@
     <ClInclude Include="OrthoCamera.h" />
     <ClInclude Include="PointLight.h" />
     <ClInclude Include="Shader.h" />
+    <ClInclude Include="ShadowMap.h" />
     <ClInclude Include="SpotLight.h" />
     <ClInclude Include="StepData.h" />
     <ClInclude Include="StepEdge.h" />
@@ -234,6 +236,14 @@
     </CopyFileToFolders>
   </ItemGroup>
   <ItemGroup>
+    <CopyFileToFolders Include="Shaders\directional_shadow_map.frag">
+      <FileType>Document</FileType>
+      <DestinationFolders Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(OutDir)Shaders</DestinationFolders>
+    </CopyFileToFolders>
+    <CopyFileToFolders Include="Shaders\directional_shadow_map.vert">
+      <FileType>Document</FileType>
+      <DestinationFolders Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(OutDir)Shaders</DestinationFolders>
+    </CopyFileToFolders>
     <None Include="StepData\BSP35B20-N-12.stp.csv" />
     <None Include="StepData\KANA_NK35B10D9_K.stp.csv" />
   </ItemGroup>

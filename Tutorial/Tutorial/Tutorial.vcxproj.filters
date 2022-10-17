@@ -111,6 +111,9 @@
     <ClCompile Include="DirectionalShadowMapSample.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="ShadowMap.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GlCommon.h">
@@ -176,6 +179,9 @@
     <ClInclude Include="Model.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="ShadowMap.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <CopyFileToFolders Include="Shaders\shader.frag">
@@ -201,6 +207,12 @@
     </CopyFileToFolders>
     <CopyFileToFolders Include="Textures\plain.png">
       <Filter>Textures</Filter>
+    </CopyFileToFolders>
+    <CopyFileToFolders Include="Shaders\directional_shadow_map.frag">
+      <Filter>Texts</Filter>
+    </CopyFileToFolders>
+    <CopyFileToFolders Include="Shaders\directional_shadow_map.vert">
+      <Filter>Texts</Filter>
     </CopyFileToFolders>
   </ItemGroup>
   <ItemGroup>
