@@ -1,10 +1,13 @@
 
 
+#include <corecrt_math_defines.h>
+
 #include "GlCommon.h"
 #include "GlProgramSource.h"
 
 #include <iostream>
 #include <vector>
+#include <math.h>
 
 #include <GLM/mat4x4.hpp>
 #include <GLM/gtc/matrix_transform.hpp>
@@ -39,7 +42,12 @@ static SpotLight spotLights[MAX_SPOT_LIGHTS];
 static Material* shinyMaterial;
 static Material* dullMaterial;
 
-static Model* holo;
+static Model* blackhawk;
+static Model* xwing;
+static Model* fish;
+static Model* aya;
+static Model* container;
+static Model* sprocket;
 
 static GLfloat deltaTime = 0.0f;
 static GLfloat lastTime = 0.0f;
@@ -180,11 +188,29 @@ int RunModelImportSample()
 	shinyMaterial = new Material(4.0f, 256);
 	dullMaterial = new Material(0.3f, 4);
 
-	holo = new Model();
-	holo->LoadModel("./Models/holo.obj");
+	
+	
+	xwing = new Model();
+	xwing->LoadModel("./Models/x-wing.obj");
+
+
+	blackhawk = new Model();
+	blackhawk->LoadModel("./Models/uh60.obj");
+
+	fish = new Model();
+	fish->LoadModel("./Models/fish.obj");
+
+	aya = new Model();
+	aya->LoadModel("./Models/091_W_Aya_30K.obj");
+
+	container = new Model();
+	container->LoadModel("./Models/Container.obj");
+
+	sprocket = new Model();
+	sprocket->LoadModel("./Models/sprocket.obj");
 
 	mainLight = new DirectionalLight(
-		1.0f, 1.0f, 1.0f, 0.2f, 0.4f,
+		1.0f, 1.0f, 1.0f, 0.5f, 0.4f,
 		0.0f, 0.0f, -1.0f);
 
 	unsigned int pointLightCount = 0;
@@ -294,14 +320,48 @@ int RunModelImportSample()
 		shinyMaterial->UseMaterial(uniformSpecularIntensity, uniformShininess);
 		meshLists[2]->RenderMesh();
 
-		model = glm::scale(model, glm::vec3(1e-1, 1e-1, 1e-1));
+		model = glm::mat4(1.0f);
+		model = glm::translate(model, glm::vec3(-7.0f, 0.0f, 10.0f));
+		model = glm::scale(model, glm::vec3(0.006f, 0.006f, 0.006f));
 		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
-		holo->RenderModel();
+		shinyMaterial->UseMaterial(uniformSpecularIntensity, uniformShininess);
+		xwing->RenderModel();
+
+		model = glm::mat4(1.0f);
+		model = glm::translate(model, glm::vec3(-3.0f, 2.0f, 0.0f));
+		model = glm::rotate(model, -90.0f * (float)M_PI / 180.0f, glm::vec3(1.0f, 0.0f, 0.0f));
+		model = glm::scale(model, glm::vec3(0.4f, 0.4f, 0.4f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		shinyMaterial->UseMaterial(uniformSpecularIntensity, uniformShininess);
+		blackhawk->RenderModel();
+
+		model = glm::mat4(1.0f);
+		model = glm::rotate(model, -90.0f * (float)M_PI / 180.0f, glm::vec3(0.0f, 0.0f, 1.0f));
+		model = glm::translate(model, glm::vec3(4.4f, -3.0f, -4.0f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		dullMaterial->UseMaterial(uniformSpecularIntensity, uniformShininess);
+		fish->RenderModel();
+
+		model = glm::mat4(1.0f);
+		model = glm::translate(model, glm::vec3(-4.5f, -2.0f, 0.0f));
+		model = glm::rotate(model, 90.0f * (float)M_PI / 180.0f, glm::vec3(0.0f, 1.0f, 0.0f));
+		model = glm::scale(model, glm::vec3(0.001f, 0.001f, 0.001f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		dullMaterial->UseMaterial(uniformSpecularIntensity, uniformShininess);
+		aya->RenderModel();
+
+		model = glm::mat4(1.0f);
+		model = glm::translate(model, glm::vec3(4.5f, -2.0f, 3.0f));
+		model = glm::scale(model, glm::vec3(0.01f, 0.01f, 0.01f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		dullMaterial->UseMaterial(uniformSpecularIntensity, uniformShininess);
+		container->RenderModel();
 
 		glUseProgram(0);
 
 		mainWindow.swapBuffers();
 	}
+
 
 	return 0;
 }

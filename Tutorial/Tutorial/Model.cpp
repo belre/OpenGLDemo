@@ -93,6 +93,7 @@ void Model::LoadMaterials(const aiScene* scene)
 	{
 		aiMaterial* material = scene->mMaterials[i];
 
+
 		if(material->GetTextureCount(aiTextureType_DIFFUSE)) 
 		{
 			aiString path;
